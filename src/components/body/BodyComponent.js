@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./categories/Home";
 import Animal from "./categories/Animal";
 import Architecture from "./categories/Architecture";
@@ -18,7 +18,6 @@ const mapStateToProps = (state) => {
     };
 };
 
-//! why this function needs to be dispatched here ???
 const mapDispatchToProps = (dispatch) => {
     return {
         authExpCheck: () => dispatch(authExpCheck()),

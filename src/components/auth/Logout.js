@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { logout } from "../../redux/authActionCreators";
 import { Route, Routes } from "react-router-dom";
 import Auth from "./Auth";
-
-//! why this function needs to be dispatched here ???
 const mapDispatchToProps = (dispatch) => {
     return {
         logout: () => dispatch(logout()),

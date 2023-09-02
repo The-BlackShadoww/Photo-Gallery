@@ -23,7 +23,12 @@ const HeaderComponent = (props) => {
         links = (
             <div>
                 <div className="py-5">
-                    <Typography variant="h4">Photo Gallery</Typography>
+                    <div className="flex justify-between my-10">
+                        <Typography variant="h4">Photo Gallery</Typography>
+                        <Button variant="contained" color="error">
+                            <Link to="/logout">Logout</Link>
+                        </Button>
+                    </div>
                 </div>
                 <br />
                 <div className="flex justify-between my-10">
@@ -48,18 +53,11 @@ const HeaderComponent = (props) => {
                     <Button variant="contained">
                         <Link to="/street">Street</Link>
                     </Button>
-                    <Button variant="contained" color="error">
-                        <Link to="/logout">Logout</Link>
-                    </Button>
                 </div>
             </div>
         );
     }
-    return (
-        <div>
-            {links}
-        </div>
-    );
+    return <div>{links}</div>;
 };
 
 export default connect(mapStateToProps)(HeaderComponent);

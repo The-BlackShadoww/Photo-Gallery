@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Formik } from "formik";
-import { Alert } from "reactstrap";
 import { auth } from "../../redux/authActionCreators";
 import { connect } from "react-redux";
 import { Button } from "@mui/material";
@@ -29,7 +28,19 @@ class Auth extends Component {
     render() {
         let err = null;
         if (this.props.authFailedMsg !== null) {
-            err = <Alert color="danger">{this.props.authFailedMsg}</Alert>;
+            err = (
+                <div
+                    className="mb-5"
+                    style={{
+                        color: "white",
+                        fontSize: 25,
+                        backgroundColor: "red",
+                        textAlign:"center"
+                    }}
+                >
+                    {this.props.authFailedMsg}
+                </div>
+            );
         }
 
         const form = (
