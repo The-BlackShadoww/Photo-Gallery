@@ -13,7 +13,7 @@ const HeaderComponent = (props) => {
     if (props.token === null) {
         links = (
             <div className="flex justify-between my-10">
-                <Typography variant="h4">Photo Gallery</Typography>
+                <Typography variant="h4">Photo Gallery Deployed</Typography>
                 <Button variant="contained">
                     <Link to="/login">Sign Up / Login</Link>
                 </Button>
