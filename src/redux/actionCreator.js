@@ -1,7 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
 import { URI } from "./URI";
-import { FirURI } from "./URI";
 //!------------------------------------------------//
 
 export const addComment = (pId, author, comment) => (dispatch) => {
@@ -12,7 +11,8 @@ export const addComment = (pId, author, comment) => (dispatch) => {
     };
     newComment.data = new Date().toISOString();
 
-    axios.post(URI + "comments", newComment)
+    axios
+        .post(URI + "comments", newComment)
         .then((res) => res.data)
         .then((comment) => dispatch(commentConcat(comment)));
 };

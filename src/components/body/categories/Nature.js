@@ -26,11 +26,17 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-const Nature = (props) => {
+const Nature = ({
+    FetchComments,
+    FetchPhotos,
+    AddComment,
+    Photos,
+    Comments,
+}) => {
     useEffect(() => {
-        props.FetchPhotos();
-        props.FetchComments();
-    }, []);
+        FetchPhotos();
+        FetchComments();
+    }, [FetchComments, FetchPhotos]);
 
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -44,7 +50,7 @@ const Nature = (props) => {
         setIsOpen(false);
     };
 
-    const naturePhotos = props.Photos.filter((p) => {
+    const naturePhotos = Photos.filter((p) => {
         return p.category === "nature";
     });
 
@@ -56,7 +62,7 @@ const Nature = (props) => {
 
     let photo = null;
     if (selectedPhoto != null) {
-        const comments = props.Comments.filter((c) => {
+        const comments = Comments.filter((c) => {
             return c.pId === selectedPhoto.id;
         });
         photo = (
@@ -64,7 +70,7 @@ const Nature = (props) => {
                 photo={selectedPhoto}
                 handleClose={handleClose}
                 comments={comments}
-                addComment={props.AddComment}
+                addComment={AddComment}
             />
         );
     }

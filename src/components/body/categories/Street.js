@@ -8,7 +8,7 @@ import {
 } from "../../../redux/actionCreator";
 import GalleryGrid from "../GalleryGrid";
 import Photo from "../Photo";
-import { Modal, ModalBody } from "reactstrap"; 
+import { Modal, ModalBody } from "reactstrap";
 
 const mapStateToProps = (state) => {
     return {
@@ -26,28 +26,33 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-
-const Street = (props) => {
-   useEffect(() => {
-        props.FetchPhotos();
-        props.FetchComments();
-    }, []);
+const Street = ({
+    FetchComments,
+    FetchPhotos,
+    AddComment,
+    Photos,
+    Comments,
+}) => {
+    useEffect(() => {
+        FetchPhotos();
+        FetchComments();
+    }, [FetchComments, FetchPhotos]);
 
     const [selectedPhoto, setSelectedPhoto] = useState(null);
-    const [isOpen, setIsOpen] = useState(false); 
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleOpen = (photo) => {
         setSelectedPhoto(photo);
-        setIsOpen(true); 
+        setIsOpen(true);
     };
 
     const handleClose = () => {
-        setIsOpen(false); 
+        setIsOpen(false);
     };
 
-    const streetPhotos = props.Photos.filter((p) => {
+    const streetPhotos = Photos.filter((p) => {
         return p.category === "street";
-    })
+    });
 
     const grid = streetPhotos.map((photo) => (
         <Grid item xs={3} key={photo.id}>
@@ -57,7 +62,7 @@ const Street = (props) => {
 
     let photo = null;
     if (selectedPhoto != null) {
-        const comments = props.Comments.filter((c) => {
+        const comments = Comments.filter((c) => {
             return c.pId === selectedPhoto.id;
         });
         photo = (
@@ -65,7 +70,7 @@ const Street = (props) => {
                 photo={selectedPhoto}
                 handleClose={handleClose}
                 comments={comments}
-                addComment={props.AddComment}
+                addComment={AddComment}
             />
         );
     }

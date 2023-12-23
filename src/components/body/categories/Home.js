@@ -27,11 +27,11 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-function Home(props) {
+function Home({ FetchComments, FetchPhotos, AddComment, Photos, Comments }) {
     useEffect(() => {
-        props.FetchPhotos();
-        props.FetchComments();
-    }, []);
+        FetchPhotos();
+        FetchComments();
+    }, [FetchComments, FetchPhotos]);
 
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +45,7 @@ function Home(props) {
         setIsOpen(false);
     };
 
-    const grid = props.Photos.map((photo) => (
+    const grid = Photos.map((photo) => (
         <Grid item xs={3} key={photo.id}>
             <GalleryGrid photos={photo} handleOpen={handleOpen} />
         </Grid>
@@ -53,7 +53,7 @@ function Home(props) {
 
     let photo = null;
     if (selectedPhoto != null) {
-        const comments = props.Comments.filter((c) => {
+        const comments = Comments.filter((c) => {
             return c.pId === selectedPhoto.id;
         });
         photo = (
@@ -61,7 +61,7 @@ function Home(props) {
                 photo={selectedPhoto}
                 handleClose={handleClose}
                 comments={comments}
-                addComment={props.AddComment}
+                addComment={AddComment}
             />
         );
     }

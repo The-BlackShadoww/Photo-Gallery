@@ -26,11 +26,17 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-const Business = (props) => {
+const Business = ({
+    FetchComments,
+    FetchPhotos,
+    AddComment,
+    Photos,
+    Comments,
+}) => {
     useEffect(() => {
-        props.FetchPhotos();
-        props.FetchComments();
-    }, []);
+        FetchPhotos();
+        FetchComments();
+    }, [FetchPhotos, FetchComments]);
 
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -44,7 +50,7 @@ const Business = (props) => {
         setIsOpen(false);
     };
 
-    const businessPhotos = props.Photos.filter((p) => {
+    const businessPhotos = Photos.filter((p) => {
         return p.category === "business";
     });
 
@@ -56,7 +62,7 @@ const Business = (props) => {
 
     let photo = null;
     if (selectedPhoto != null) {
-        const comments = props.Comments.filter((c) => {
+        const comments = Comments.filter((c) => {
             return c.pId === selectedPhoto.id;
         });
         photo = (
@@ -64,7 +70,7 @@ const Business = (props) => {
                 photo={selectedPhoto}
                 handleClose={handleClose}
                 comments={comments}
-                addComment={props.AddComment}
+                addComment={AddComment}
             />
         );
     }

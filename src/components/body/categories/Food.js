@@ -8,7 +8,7 @@ import {
 } from "../../../redux/actionCreator";
 import GalleryGrid from "../GalleryGrid";
 import Photo from "../Photo";
-import { Modal, ModalBody } from "reactstrap"; 
+import { Modal, ModalBody } from "reactstrap";
 
 const mapStateToProps = (state) => {
     return {
@@ -26,27 +26,27 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-const Food = (props) => {
+const Food = ({ FetchComments, FetchPhotos, AddComment, Photos, Comments }) => {
     useEffect(() => {
-        props.FetchPhotos();
-        props.FetchComments();
-    }, []);
+        FetchPhotos();
+        FetchComments();
+    }, [FetchPhotos, FetchComments]);
 
     const [selectedPhoto, setSelectedPhoto] = useState(null);
-    const [isOpen, setIsOpen] = useState(false); 
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleOpen = (photo) => {
         setSelectedPhoto(photo);
-        setIsOpen(true); 
+        setIsOpen(true);
     };
 
     const handleClose = () => {
-        setIsOpen(false); 
+        setIsOpen(false);
     };
 
-    const foodPhotos = props.Photos.filter((p) => {
+    const foodPhotos = Photos.filter((p) => {
         return p.category === "food";
-    })
+    });
 
     const grid = foodPhotos.map((photo) => (
         <Grid item xs={3} key={photo.id}>
@@ -56,7 +56,7 @@ const Food = (props) => {
 
     let photo = null;
     if (selectedPhoto != null) {
-        const comments = props.Comments.filter((c) => {
+        const comments = Comments.filter((c) => {
             return c.pId === selectedPhoto.id;
         });
         photo = (
@@ -64,7 +64,7 @@ const Food = (props) => {
                 photo={selectedPhoto}
                 handleClose={handleClose}
                 comments={comments}
-                addComment={props.AddComment}
+                addComment={AddComment}
             />
         );
     }
